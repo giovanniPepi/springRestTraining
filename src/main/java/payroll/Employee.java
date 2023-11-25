@@ -3,6 +3,7 @@ package payroll;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.util.Objects;
@@ -10,11 +11,12 @@ import java.util.Objects;
 @Entity
 class Employee {
     private @Id
-    @GeneratedValue Long id;
+    @GeneratedValue (strategy = GenerationType.SEQUENCE) Long id;
     private String name;
     private String role;
 
     Employee() {
+
     }
 
     Employee(String name, String role) {
@@ -48,12 +50,10 @@ class Employee {
 
     @Override
     public boolean equals(Object o) {
-
         if (this == o)
             return true;
-        if (!(o instanceof Employee))
+        if (!(o instanceof Employee employee))
             return false;
-        Employee employee = (Employee) o;
         return Objects.equals(this.id, employee.id) && Objects.equals(this.name, employee.name)
                 && Objects.equals(this.role, employee.role);
     }
